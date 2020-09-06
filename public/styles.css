@@ -9,6 +9,7 @@ html {
 body {
   background: #eee;
   padding: 0 16px;
+  background-image: url("https://www.transparenttextures.com/patterns/escheresque.png");
 }
 
 header {
@@ -61,8 +62,8 @@ footer p {
   margin-right: 10px;
   color: #f5ba13;
   border: none;
-  width: 36px;
-  height: 36px;
+  /* width: 36px;
+  height: 36px; */
   cursor: pointer;
   outline: none;
 }

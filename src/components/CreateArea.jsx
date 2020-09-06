@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import Fab from "@material-ui/core/Fab";
+import Zoom from "@material-ui/core/Zoom";
 
 function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
     content: ""
   });
+  const [zoomIn, setZoomIn] = useState(false);
+  const [inputHeight, setInputHeight] = useState("1");
 
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setNote(prevNote => {
+    setNote((prevNote) => {
       return {
         ...prevNote,
         [name]: value
@@ -26,23 +30,36 @@ function CreateArea(props) {
     event.preventDefault();
   }
 
+  function zoomAnimation() {
+    setZoomIn(true);
+    setInputHeight("3");
+  }
+
   return (
     <div>
       <form className="create-note">
-        <input
-          name="title"
-          onChange={handleChange}
-          value={note.title}
-          placeholder="Title"
-        />
+        {zoomIn && (
+          <Zoom in={zoomIn}>
+            <input
+              name="title"
+              onChange={handleChange}
+              value={note.title}
+              placeholder="Title"
+              onClick={zoomAnimation}
+            />
+          </Zoom>
+        )}
         <textarea
           name="content"
           onChange={handleChange}
           value={note.content}
           placeholder="Take a note..."
-          rows="3"
+          rows={inputHeight}
+          onClick={zoomAnimation}
         />
-        <button onClick={submitNote}>Add</button>
+        <Zoom in={zoomIn}>
+          <Fab onClick={submitNote}>Add</Fab>
+        </Zoom>
       </form>
     </div>
   );
